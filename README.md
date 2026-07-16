@@ -97,6 +97,15 @@ git clone https://github.com/Hyacehila/humanizer-zh-next ~/.codex/skills/humaniz
 
 humanizer-zh-next 会尽量保留你的句子长短、正式程度、节奏、用词偏好和表达习惯，而不是套用统一的“自然中文”模板。
 
+## 相关项目推荐
+
+下面两个项目解决的问题与本项目相近，但面向的语言和写作场景不同。建议根据实际需求选择，不必同时使用。
+
+- [blader/humanizer](https://github.com/blader/humanizer)：本项目参考的英文原版。它围绕英文写作中的 AI 痕迹设计规则。如果需要编辑或改写英文文本，建议直接使用该项目。
+- [AIScientists-Dev/academic-humanizer](https://github.com/AIScientists-Dev/academic-humanizer)：面向论文、基金申请等英文学术写作，侧重保留学术表达、论断与证据之间的关系，以及原文中的数字和引用。需要处理学术文本时，可以优先考虑该项目。
+
+理工科论文和基金申请通常直接使用英文撰写，因此本项目不会将 `academic-humanizer` 另行适配为中文版本。humanizer-zh-next 仍将专注于中文语境下的通用写作去痕。
+
 ## 概述
 
 humanizer-zh-next 检测并修复 33 类常见 AI 写作模式，覆盖内容、语言、风格、交流痕迹、填充词和回避表达。
