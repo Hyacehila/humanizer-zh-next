@@ -20,7 +20,13 @@ Humanizer-zh-next 使用、翻译或改编了以下 MIT 许可项目中的部分
 - 采用范围：结构套路、填充短语、虚假行动者、快速检查和质量自检思路。
 - Copyright (c) 2025 Hardik Pandya
 
-以上三个项目均依据 MIT License 发布。其许可文本如下：
+## AIScientists-Dev/academic-humanizer
+
+- Commit: `94b88b23703bed7df507acae7d6d5876209a0cdf`
+- 采用范围：学术专属写作规则、论断与证据约束、作者语体校准、基金申请模式和示例组织方式；相关内容已按中文学术表达及中国基金申请场景重写。
+- Copyright (c) 2026 AIScientists-Dev
+
+以上四个项目均依据 MIT License 发布。其许可文本如下：
 
 ---
 
