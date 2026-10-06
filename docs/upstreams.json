@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-10-03",
+  "project_version": "2.0.0",
+  "local_base": "cf08ea33910a094f6738cec01ed9c6fc19acc2f9",
+  "remote_base": "10795c2964cec5d1f4bc4c7830b51adaa5eca33c",
+  "sources": [
+    {
+      "repository": "blader/humanizer",
+      "commit": "225a6f39ac85f76ee48dbad772ea4abe4ed6c9d8",
+      "version": "3.1.0",
+      "license": "MIT",
+      "source_paths": [
+        "SKILL.md",
+        "CHANGELOG.md"
+      ],
+      "adapted_into": [
+        "SKILL.md"
+      ],
+      "contribution": "信息优先、禁止编造、对话上下文、假想反对意见及文件模式",
+      "not_adopted": "单次命中即强制修改、默认展示草稿、英文排版规则和完整插件包装"
+    },
+    {
+      "repository": "op7418/Humanizer-zh",
+      "commit": "f4518a8eab97b8bfebc66a89d34320a89bef6930",
+      "version": "2026-09-23",
+      "license": "MIT",
+      "source_paths": [
+        "SKILL.md",
+        "tests/README.md",
+        "tests/check_structure.py",
+        "tests/fixtures/cases.json"
+      ],
+      "adapted_into": [
+        "SKILL.md",
+        "tests/behavior-cases.json",
+        "scripts/check_structure.py"
+      ],
+      "contribution": "限定、归因、时间关系、反例和文件结构核对的思路；测试与辅助脚本重新实现",
+      "not_adopted": "固定模式数量和仅靠结构检查证明语义保真的做法"
+    },
+    {
+      "repository": "hardikpandya/stop-slop",
+      "commit": "8da1f030185bdfe8471220585162991eaeb970e9",
+      "version": "unversioned",
+      "license": "MIT",
+      "source_paths": [
+        "SKILL.md",
+        "references/structures.md"
+      ],
+      "adapted_into": [
+        "SKILL.md"
+      ],
+      "contribution": "抽象行动者、无信息铺垫与装饰性收尾的编辑检查",
+      "not_adopted": "禁止全部副词、被动句、破折号，固定列举数量和质量评分阈值"
+    },
+    {
+      "repository": "AIScientists-Dev/academic-humanizer",
+      "commit": "94b88b23703bed7df507acae7d6d5876209a0cdf",
+      "version": "0.3.3",
+      "license": "MIT",
+      "source_paths": [
+        "SKILL.md"
+      ],
+      "adapted_into": [
+        "references/academic-writing.md",
+        "references/grant-proposals.md"
+      ],
+      "contribution": "承接本项目 1.3.0 的学术能力，分离结果保护、证据校准和提案可行性",
+      "not_adopted": "统一禁用破折号，以及把特定机构的栏目、页数和年度规则作为通用要求"
+    },
+    {
+      "repository": "jiji262/humanizer-chinese",
+      "commit": "1d6c08e10fbfe0e1b36ac784834451c6aae0a92c",
+      "version": "1.0.0",
+      "license": "MIT",
+      "source_paths": [
+        "SKILL.md"
+      ],
+      "adapted_into": [
+        "SKILL.md"
+      ],
+      "contribution": "欧化句法、中文无主句、弱动词、真实语域和防假口语",
+      "not_adopted": "模型指纹、来源断言、检测准确率、硬性词频阈值、无依据的示例新增"
+    },
+    {
+      "repository": "coreyhaines31/marketingskills",
+      "commit": "26f7342b26670e5581b48cd64e9dba3eb8a0c3aa",
+      "version": "copy-editing 2.1.0",
+      "license": "MIT",
+      "source_paths": [
+        "skills/copy-editing/SKILL.md",
+        "skills/copy-editing/references/checklist.md"
+      ],
+      "adapted_into": [
+        "references/commercial-editing.md"
+      ],
+      "contribution": "按清晰度、声音、读者利益、证据、具体性和行动条件分维度审阅",
+      "not_adopted": "评分面板、固定七轮、强制增强情绪、无依据的数据量化、承诺和转化策略"
+    }
+  ],
+  "reviewed_candidates": [
+    {
+      "repository": "RobinZorro86/humanizer-zh-plus",
+      "commit": "f450953d241cb40c7bcc9ccc9b82a56ffa21a088",
+      "license": "MIT",
+      "decision": "观察；规则与已采用基线重叠，入口与详细库也有重复，不作为新增运行分支"
+    },
+    {
+      "repository": "richyuh/claude-skills",
+      "commit": "77b048bd8b86fe83d130ee8fd2874f074dac80c5",
+      "license": "MIT",
+      "decision": "观察 writing-clearly-and-concisely；英文语法与通用清晰写作建议不直接搬入中文技能"
+    },
+    {
+      "repository": "NaeMyoAungKhing/humanizer",
+      "commit": null,
+      "license": "Code MIT; profiles CC-BY-SA-4.0",
+      "decision": "只审阅公开项目说明；不导入群体声音档案或前端，未锁定可采纳版本"
+    },
+    {
+      "repository": "koaeraser/ARMS",
+      "commit": null,
+      "license": "not-reviewed",
+      "decision": "academic-humanizer 致谢的间接来源；只审阅公开说明，不引入自主研究、实验或论文生产流程"
+    }
+  ],
+  "layout_revised_on": "2026-10-06",
+  "runtime_references": [
+    "references/commercial-editing.md",
+    "references/academic-writing.md",
+    "references/grant-proposals.md"
+  ]
+}

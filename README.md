@@ -1,170 +1,148 @@
 # Humanizer-zh-next
 
-> **声明：**
-> - 本项目继承并参考了 [op7418/humanizer-zh](https://github.com/op7418/humanizer-zh) 的中文语境、安装说明和早期 Skill 形态。
-> - 本项目吸收了 [blader/humanizer](https://github.com/blader/humanizer) `2.8.2` 的规则结构、维护思路和最新检测模式。
-> - 本项目吸收了 [hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop) 中适合中文语境的结构套路、快速检查和质量自检思路。
-> - 本项目基于 [AIScientists-Dev/academic-humanizer](https://github.com/AIScientists-Dev/academic-humanizer) commit `94b88b23`，增加了面向中文论文、学位论文、审稿回复和基金申请的学术模式。
-> - 本项目参考了 Wikipedia 的 [Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing) 与 [WikiProject AI Cleanup](https://en.wikipedia.org/wiki/Wikipedia:WikiProject_AI_Cleanup) 相关资料。
+编辑已有中文文本中的空话、重复和模板化表达，保留原意、事实、确定程度和作者声音。通用模式、中文表达、体裁判断、原有的作者样本方法和文件保护都集中在主 [SKILL.md](SKILL.md)，商务营销、学术写作和基金提案分别按需加载三个专用分支。
 
+当前版本为 **2.0.0**，版本日期为 **2026-10-07**。本次承接原项目的完整通用模式和 1.3.0 的学术能力，更新语义保真规则，并选择性整合中文适配与商务审阅的新来源。结构于 2026-10-06 调整，上游审阅日期为 2026-10-03。
 
----
+这是一份由 Agent 读取执行的编辑技能，无独立模型或在线运行服务。辅助检查脚本使用 Python 3.10+ 标准库；普通文本编辑不依赖 Python。它不判断作者身份，也不承诺通过检测器或移除水印。
 
-## 项目简介
-Humanizer-zh-next 是中文 AI 写作去痕 Skill。它用于编辑、审阅和改写中文文本，也为论文、学位论文、审稿回复和基金申请提供单独的学术模式。目标是让文字更自然，同时保留原文的事实、语气和用途；在学术文本中，还会保护数字、公式、引用和论断的证据边界。
+## 本次调整
 
-本项目以 `op7418/humanizer-zh` 为基础，吸收 `blader/humanizer` 英文版持续更新的规则。考虑到 `blader/humanizer` 一直在更新，但是中文版本 `op7418/humanizer-zh` 缺乏长期维护，因此单独建立该仓库，用于长期维护 Humanizer 的中文版本。如果你认为该 Skill 有任何值得优化的地方或者不足之处，欢迎提出 issue 或 pull request，希望该 Skill 能够得到长期的维护以提供更好的用户体验。
+- 普通编辑不再补造个人经历、情绪和细节；所有教学示例的改写只使用示例原文的信息。
+- 保留独立信息和语义关系，允许合理拆合段落，取消段落数量、标点和列举配额。
+- 主 `SKILL.md` 保留旧版 33 类模式，补充回复上下文和段落重复两类规则；35 类模式均有中文示例与适用边界。
+- 中文句法、弱动词、无主句、连接词、作者声音、体裁、文件保护与完整示例一并放在主文件，不拆成额外 reference。
+- 保留学术模式，分离基金申请的目标、方法、前期基础与可行性检查。
+- 文件模式保护代码、公式、数据、链接、标题和步骤关系，并提供只读结构检查。
+- 提供固定提交的上游记录、包检查和行为评测材料；取消质量自评分阈值。
 
 ## 安装
 
-### 让 AI 帮你安装
-
-把下面这段话发给你正在使用的 AI 编程助手：
-
-```text
-请帮我安装 humanizer-zh-next Skill。
-
-仓库地址是：https://github.com/Hyacehila/humanizer-zh-next
-
-请根据当前 Agent 或编辑器的 Skill 目录规则安装它。如果支持 skills CLI，请优先运行：
-
-npx skills add https://github.com/Hyacehila/humanizer-zh-next
-
-如果不支持，请把完整的 humanizer-zh-next 目录安装到当前环境可识别的 skills 目录，确保目录名是 humanizer-zh-next，且 SKILL.md 位于该目录根部。
-```
-
-### Skills CLI 一键安装
+在支持 Agent Skills 的环境中运行：
 
 ```bash
 npx skills add https://github.com/Hyacehila/humanizer-zh-next
 ```
 
-这是最简单的安装方式，会自动把 Skill 安装到当前工具支持的位置。
+仓库安装命令取得远端当前版本，并保留完整技能目录。
 
-### Git 克隆
-
-不同 Agent 的 skills 目录可能不同，请把下面的 `<SKILLS_DIR>` 替换为你的实际目录。
+也可以克隆远端后，按目标环境的技能目录要求放置：
 
 ```bash
 git clone https://github.com/Hyacehila/humanizer-zh-next <SKILLS_DIR>/humanizer-zh-next
 ```
 
-示例：
+安装时保留主文件、完整的三个 `references/`、`LICENSE` 和 `THIRD_PARTY_NOTICES.md`；只复制主文件会丢失体裁分支。`docs/` 保存来源记录，`scripts/` 和 `tests/` 提供验证材料，不是普通编辑运行的必需依赖。维护者应保留完整目录。
 
-```bash
-git clone https://github.com/Hyacehila/humanizer-zh-next ~/.codex/skills/humanizer-zh-next
-```
-
-### 手动安装
-
-1. 下载本仓库。
-2. 在 Agent 支持的 skills 目录下创建 `humanizer-zh-next` 子目录。
-3. 将完整仓库内容复制到该目录中。`SKILL.md` 和 `references/` 必须一并保留，否则学术模式无法加载；`LICENSE` 与 `THIRD_PARTY_NOTICES.md` 也应随项目保留。
-4. 确认最终结构为 `<SKILLS_DIR>/humanizer-zh-next/SKILL.md`，且 `<SKILLS_DIR>/humanizer-zh-next/references/academic-writing.md` 存在。
+本次升级没有自动修改其他已安装副本。技能目录的名称应为 `humanizer-zh-next`，与元数据 `name` 一致；源码仓库可以使用其他本地目录名。
 
 ## 使用
 
-### 常规用法
-
-安装后，可以这样调用：
+普通润色默认只返回终稿：
 
 ```text
-请用 humanizer-zh-next 帮我改写下面这段文案，降低 AI 腔，但保留事实和语气：
-
+请用 humanizer-zh-next 润色这段中文。减少空话和重复，保留原意、全部信息和语气：
 ……
 ```
 
-也可以用于审阅：
+可以指定轻度调整、标准去 AI 腔或深入重写；没有要求时，不自动扩大成摘要、事实核查或补充论据。
+
+作者样本只用于匹配声音：
 
 ```text
-请用 humanizer-zh-next 检查下面这段 README，指出最明显的 AI 写作痕迹，并给出自然版本：
-
-……
+参考下面的写作样本，润色目标文本。不要把样本的经历和立场移入目标稿。
+写作样本：……
+目标文本：……
 ```
 
-### 学术写作与基金申请
-
-处理中文论文、学位论文、审稿回复或基金申请时，Skill 会自动读取 `references/academic-writing.md`。学术模式不会为了追求口语化而删掉必要限定，也不会改动数字、公式、结果、图表编号或引用。
+文件任务区分审阅与写回：
 
 ```text
-请用 humanizer-zh-next 修改下面这段论文摘要。去掉 AI 腔，检查论断是否超过证据范围，保留所有数字、公式和引用：
-
-……
+审阅 docs/intro.md，指出表达问题，暂时不要修改文件。
 ```
-
-基金申请也可以按同样方式审阅：
 
 ```text
-请用 humanizer-zh-next 审阅这段基金申请的立项依据。保留有根据的研究愿景，检查科学问题、研究内容和前期基础是否对应，不要补写任何数据或经历：
-
-……
+润色 docs/intro.md 并写回。保护代码、链接、标题和数据，不提交。
 ```
 
-学术模式默认返回终稿、简短变更报告和保真确认。基金申请的栏目、篇幅与合规要求以申报年度和具体项目的官方指南为准；本 Skill 不代写申请书，也不用于规避 AI 使用披露。
-
-### 语气校准
-
-如果你希望它贴近自己的写法，可以先提供一段写作样本：
+学术文本按对应模式处理：
 
 ```text
-下面是我平时的写作样本，请先学习语气，再改写目标文本。
-
-写作样本：
-……
-
-目标文本：
-……
+润色这段论文摘要，保留全部数字、公式、引用、限定和主张。
 ```
 
-humanizer-zh-next 会尽量保留你的句子长短、正式程度、节奏、用词偏好和表达习惯，而不是套用统一的“自然中文”模板。
+```text
+审阅这段基金申请的论证，检查问题、目标、方法与前期基础的关系。不要补写数据和经历，缺少的依据列在正文之外。
+```
 
-## 相关项目与来源
+主张校准或外部核查需要任务明确要求；普通润色不会把作者的判断静默改弱或改强。
 
-下面两个项目是 humanizer-zh-next 的主要英文来源，分别提供通用规则和学术模式基线。
+## 主文件与三个 reference
 
-- [blader/humanizer](https://github.com/blader/humanizer)：本项目参考的英文原版。它围绕英文写作中的 AI 痕迹设计规则。如果需要编辑或改写英文文本，建议直接使用该项目。
-- [AIScientists-Dev/academic-humanizer](https://github.com/AIScientists-Dev/academic-humanizer)：面向英文学术论文和基金申请。humanizer-zh-next `1.3.0` 以固定 commit 为基线，将其中的学术专属规则本土化，并按中国基金申请场景重写为单独 reference。
+普通文本直接使用主文件的完整规则，不需要额外加载通用模式或中文表达文档。`references/` 目录只有以下三个专用文件：
 
-## 概述
+| 文件 | 用途 |
+| --- | --- |
+| [SKILL.md](SKILL.md) | 公共约束、35 类通用模式、中文表达、体裁矩阵、作者声音、文件保护、流程与完整示例 |
+| [commercial-editing.md](references/commercial-editing.md) | 商务与营销文案的分维度审阅 |
+| [academic-writing.md](references/academic-writing.md) | 数字引用、学术语体、证据与审稿回复 |
+| [grant-proposals.md](references/grant-proposals.md) | 研究计划、基金模板和目标与可行性 |
 
-humanizer-zh-next 检测并修复 33 类常见 AI 写作模式，覆盖内容、语言、风格、交流痕迹、填充词和回避表达。学术文本在这些通用规则之上进入单独模式，不把正式、专业或必要的学术限定误判为 AI 痕迹。
+商务文案的分维度审阅独立保存；学术与基金分支分别处理研究结果和拟开展工作。基金材料涉及既有研究结果时，可同时读取学术分支。
 
-它尤其关注中文语境中的问题：
+维护材料放在运行 reference 目录之外：
 
-- “赋能、生态、闭环、抓手、底层逻辑、价值沉淀”等中文 AI/营销高频词。
-- “让我们深入探讨”“下面我们来拆解”“值得注意的是”等导览式开场和填充短语。
-- “真正的问题是”“归根结底”“核心在于”等权威姿态和伪洞察话术。
-- “未来可期”“广阔前景”“机遇与挑战并存”等通用积极结论。
-- 技术文档和 README 中常见的 diff 叙述，例如“新增了……用于替代旧方案”。
-- 学术写作中无证据的“证明、首次、显著、填补空白”，以及论断强于数据或引用的问题。
-- 基金申请中愿景、研究目标、研究内容、方法和前期基础彼此脱节的问题。
+| 文件或目录 | 用途 |
+| --- | --- |
+| [docs/upstream-sources.md](docs/upstream-sources.md) | 来源相关性、固定提交和采纳取舍 |
+| [docs/upstreams.json](docs/upstreams.json) | 可检查的上游版本、目标文件与分支记录 |
+| [scripts/validate_package.py](scripts/validate_package.py) | 离线检查元数据、链接、三分支结构与来源归属 |
+| [scripts/check_structure.py](scripts/check_structure.py) | 只读比较 Markdown 的受保护内容 |
+| [tests/README.md](tests/README.md) | 结构检查和语义行为案例的执行方法 |
 
-AI 腔通常不是单个词造成的，而是多个模式叠加后的效果：抽象名词太多、判断太满、来源太虚、结构太整齐、结尾太积极、语气太像助手。
+普通编辑任务无需读取维护记录或所有来源。
 
-所以本 Skill 不会把正式、学术、专业或语法干净本身当作 AI 痕迹。它会优先修复那些让文本变得空泛、虚高、模板化或不像当前作者的地方。学术模式还要求所有数字、公式、结果和引用保持不变；证据不足时收窄论断或交给作者补充，不会编造材料。
+## 上游与新的参考项目
 
-除了模式词表，本 Skill 还吸收了英文版的几条方法论：**改写而非删除、等量覆盖**（原文有五段，改写也有五段，不靠压缩去痕）；**初稿 → 自检“是什么让它一眼像 AI” → 终稿**的工作流；以及**个性与灵魂的适用范围护栏**（只对博客、随笔、观点类加个性，技术和参考类文本中性平实就是正确的人类声音）。学术细则按需加载，避免普通文本承担不相关的上下文。
+原有四项来源继续保留，采用版本详见 [上游整合记录](docs/upstream-sources.md)：
 
-## 参考文献
+- [blader/humanizer](https://github.com/blader/humanizer)：通用基线更新至 3.1.0。
+- [op7418/Humanizer-zh](https://github.com/op7418/Humanizer-zh)：采用 2026-09-23 的语义保真与中文修订。
+- [hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop)：保留适合中文的编辑思路，采用提交未变。
+- [AIScientists-Dev/academic-humanizer](https://github.com/AIScientists-Dev/academic-humanizer)：承接 1.3.0 的 0.3.3 学术基线，采用提交未变。
 
-- [op7418/humanizer-zh](https://github.com/op7418/humanizer-zh) commit `91f3d39`，中文语境和早期中文 Skill 基线。
-- [blader/humanizer](https://github.com/blader/humanizer) version `2.8.2`，英文规则和 README 结构基线。
-- [hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop)，结构套路、虚假行动者、快速检查和质量自检参考。
-- [AIScientists-Dev/academic-humanizer](https://github.com/AIScientists-Dev/academic-humanizer) commit `94b88b23703bed7df507acae7d6d5876209a0cdf`，学术专属规则、论断—证据约束和基金申请模式基线。
-- [国家自然科学基金委员会：2026 年申请书改版说明](https://www.nsfc.gov.cn/p1/3381/2821/99242.html)
-- [国家自然科学基金委员会：关于 2026 年度项目申请与结题等有关事项的通告](https://www.nsfc.gov.cn/p1/3381/2824/99667.html)
-- [Wikipedia: Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing)
-- [Wikipedia: WikiProject AI Cleanup](https://en.wikipedia.org/wiki/Wikipedia:WikiProject_AI_Cleanup)
+本次新增两项来源：
+
+- [jiji262/humanizer-chinese](https://github.com/jiji262/humanizer-chinese)：选择性引用中文句式、弱动词、无主句、语域和防假口语，全部融入主文件，不创建独立 reference。
+- [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills)：选择性适配 copy-editing 的分维度审阅。
+
+没有把这些项目的规则全部叠加：模型指纹、检测准确率、统一禁词、固定句式配额、无依据的数字和承诺不纳入本项目。已审阅但没有新增价值的候选保留在整合记录中，便于之后复查。
+
+## 验证
+
+维护者在仓库根目录运行：
+
+```bash
+python scripts/validate_package.py
+python -B -m unittest discover -s tests -p "test_*.py"
+```
+
+Markdown 文件的原稿与改稿可作只读结构检查：
+
+```bash
+python scripts/check_structure.py original.md edited.md
+```
+
+语义与声音需要实际执行 [行为案例](tests/behavior-cases.json) 并人工核对，方法见 [评测说明](tests/README.md)。结构检查、字数下降和单次样例通过均不代表稳定的编辑质量或检测能力。
 
 ## 版本历史
 
-- `1.3.0`：增加按需加载的中文学术写作 reference，覆盖论文、学位论文、审稿回复和中国基金申请；加入论断—证据、目标—可行性检查，保护数字、公式、结果和引用，并补充基金申请的年度模板与 AI 使用合规边界。
-- `1.2.0`：增加六类体裁决策矩阵和事实新增边界；个人叙事新增内容须逐项提示核实，专业体裁禁止补写事实；新增第三方版权声明，并修正完整目录安装方式。
-- `1.1.0`：进一步对齐 `blader/humanizer` `2.8.2` 的方法论与文件结构。吸收“改写而非删除 / 等量覆盖”原则、“初稿→自检→终稿”工作流、“个性与灵魂”的适用范围护栏；把完整示例重构为完整循环；强化 #14 破折号规则（强化但不归零，尊重中文标点习惯）；补充尾部否定示例、人类写作迹象清单和“信号成簇才是自白”的判断收束。同时按英文原版重排章节：Your Task 收敛为 4 条，合并“检测指南”（误判保护 + 人类迹象）与“处理流程与输出”，移除英文版没有的“核心规则速查”，把质量自检表折叠进处理流程。全面扩写 33 类模式：补全每条的触发词清单、加深“问题”诊断（解释 LLM 为什么这么写），并为大多数模式补上 `op7418/Humanizer-zh` 与 `blader/humanizer` 的百科式案例中译，与本地化中文例子形成双例；语言特定的 #17/#19/#26 保留单例并说明中文对应表现。补齐“检测指南”一节：对齐英文 DETECTION GUIDANCE 的全部条目（新增语域混用、书信体、无来源主张、学术词汇细分、年代感引用、可辩护的编辑选择、ChatGPT 发布前文本等），并把光秃清单升级为“要点 + 解释”的阐述式。把“完整示例”补成与英文原版等长的里斯本随笔（六段原文 → 六段终稿），完整演示 原文→初稿→自检→终稿→改动说明 的循环。
-- `1.0.0`：参考 `blader/humanizer` `2.8.2` 和 `op7418/humanizer-zh` commit `91f3d39` 为基线发布。吸收英文版 33 类模式，并按中文写作习惯重写触发词、示例、误判保护和输出流程。同时吸收 `stop-slop` 中适合中文语境的结构套路、虚假行动者和质量自检思路。
+- **2.0.0（2026-10-07）**：完整通用模式与中文表达集中在主文件，只保留商务营销、学术写作、基金提案三个 reference；以英文 3.1.0 和中文 2026-09-23 修订更新规则，新增中文适配与商务审阅两项来源；收紧事实、主张和文件保护，将来源记录移至 docs，增加可执行检查。
+- **1.3.0**：增加按需加载的中文学术写作 reference，覆盖论文、学位论文、审稿回复和中国基金申请；加入论断与证据、目标与可行性检查，保护数字、公式、结果和引用。
+- **1.2.0**：增加体裁决策矩阵和事实新增边界；个人叙事新增内容逐项提示核实，专业体裁禁止补写事实；新增第三方版权声明并修正完整目录安装方式。2.0.0 进一步取消普通个人叙事补写细节的例外。
+- **1.1.0**：对齐英文 2.8.2 的 33 类模式、声音护栏、误判保护和改写循环，扩写中文及百科式示例。
+- **1.0.0**：以英文 2.8.2 和中文 `91f3d39` 为基线，适配中文规则并吸收 stop-slop 的结构检查思路。
 
 ## 许可
 
-MIT
-
-本项目使用和改编的第三方 MIT 项目、固定版本及版权声明见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
+MIT，见 [LICENSE](LICENSE)。采用的固定版本、原始版权和许可文本见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。

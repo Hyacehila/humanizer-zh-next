@@ -20,3 +20,7 @@ temp/
 node_modules/
 dist/
 build/
+
+# Python validation helpers
+__pycache__/
+*.py[cod]
