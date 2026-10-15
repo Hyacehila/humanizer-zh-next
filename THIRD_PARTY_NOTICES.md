@@ -40,6 +40,12 @@ Humanizer-zh-next 选择性翻译、改编以下 MIT 项目的编辑规则、示
 - 采用范围：`skills/copy-editing/` 的分维度审阅方法与证据检查；按本项目保真和体裁范围重写。
 - Copyright (c) 2025 Corey Haines
 
+## deathcats4/scientific-manuscript-editor
+
+- Commit: `9371352cf7153076065421e8686bf1139f61ddc6`（元数据版本 1.9.0，含 2026-10-08 主分支更新）
+- 采用范围：科学主张与必要限定、重复防御、学术表达保护、章节限定分布及删句后的论证作用核对；按本项目中文编辑边界改写，教学示例与行为案例重新编写。
+- Copyright (c) 2026 deathcats4
+
 以上项目均以 MIT License 发布。未整合的候选和观察性网页不作为 MIT 内容纳入本项目。各项原始版权声明及以下许可文本随分发保留：
 
 ---

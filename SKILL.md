@@ -6,8 +6,8 @@ description: |
   商务营销、论文与审稿回复、基金申请分别按需加载专用 reference。用于写作质量编辑，不判定作者身份。
 license: MIT
 metadata:
-  version: "2.0.0"
-  upstream-reviewed: "2026-10-03"
+  version: "2.1.0"
+  upstream-reviewed: "2026-10-15"
 ---
 
 # Humanizer-zh-next：中文表达编辑
@@ -67,7 +67,7 @@ metadata:
 | 场景 | 读取文件 | 分支作用 |
 | --- | --- | --- |
 | 产品介绍、商务营销文案的系统编辑或审阅 | [商务与营销编辑](references/commercial-editing.md) | 按清晰度、声音、读者利益、证据、具体性、情绪和行动条件审阅 |
-| 论文、学位论文、摘要、方法、结果、讨论、审稿回复 | [学术写作](references/academic-writing.md) | 保护研究结果与引用，按任务范围检查论断和证据 |
+| 论文、学位论文、摘要、方法、结果、讨论、审稿回复 | [学术写作](references/academic-writing.md) | 保护研究结果与引用，减少重复防御，按任务范围检查论断和证据 |
 | 基金申请、研究计划、项目提案 | [基金与研究提案](references/grant-proposals.md) | 对应科学问题、目标、方法、基础、风险和可行性 |
 
 基金提案涉及已有研究结果时，同时读取学术分支。不要把营销行动入口强加到论文，也不要把学术证据审阅自动扩大为外部研究。

@@ -2,11 +2,23 @@
 
 编辑已有中文文本中的空话、重复和模板化表达，保留原意、事实、确定程度和作者声音。通用模式、中文表达、体裁判断、原有的作者样本方法和文件保护都集中在主 [SKILL.md](SKILL.md)，商务营销、学术写作和基金提案分别按需加载三个专用分支。
 
-当前版本为 **2.0.0**，版本日期为 **2026-10-07**。本次承接原项目的完整通用模式和 1.3.0 的学术能力，更新语义保真规则，并选择性整合中文适配与商务审阅的新来源。结构于 2026-10-06 调整，上游审阅日期为 2026-10-03。
+当前版本为 **2.1.0**，版本日期为 **2026-10-15**。本次重点优化学术表达中的防御性写作：减少重复免责声明、过度限定和针对假想批评的自我辩护，保留必要的科学边界、负结果与作者判断。
+
+**主要适用于 GPT6 系列模型的中文学术润色与审阅。** 行为案例与实际验证范围见 [评测说明](tests/README.md)。
 
 这是一份由 Agent 读取执行的编辑技能，无独立模型或在线运行服务。辅助检查脚本使用 Python 3.10+ 标准库；普通文本编辑不依赖 Python。它不判断作者身份，也不承诺通过检测器或移除水印。
 
-## 本次调整
+## 2.1.0 更新重点：防御性写作
+
+- 将原稿已有的研究对象、条件、比较范围和确定程度写入主张，减少后接重复免责的表达。
+- 区分重复防御与必要限定：合并同一层不确定性，保留独立的样本限制、未验证范围、反证和失败结果。
+- 按段落和章节功能安排限定，保留摘要等独立阅读单元需要的边界；不自动添加泛泛的局限、其他解释或未来工作。
+- 删除或合并后核对论证作用、指代和引用关系，保护真实审稿质疑所需的解释与改动状态。
+- 新增中文正反例和配套行为案例；参考 [scientific-manuscript-editor](https://github.com/deathcats4/scientific-manuscript-editor) 的相关方法，集中整合到现有学术 reference。
+
+本次更新保留 2.0.0 的通用模式与三个体裁分支；普通润色仍按原稿主张处理，证据校准按用户指定范围进行。
+
+## 已有编辑能力
 
 - 普通编辑不再补造个人经历、情绪和细节；所有教学示例的改写只使用示例原文的信息。
 - 保留独立信息和语义关系，允许合理拆合段落，取消段落数量、标点和列举配额。
@@ -71,6 +83,14 @@ git clone https://github.com/Hyacehila/humanizer-zh-next <SKILLS_DIR>/humanizer-
 润色这段论文摘要，保留全部数字、公式、引用、限定和主张。
 ```
 
+清理学术文本中的防御性表达：
+
+```text
+请用 humanizer-zh-next 润色下面的讨论段，减少重复免责、过度限定和假想反驳。
+保留原有主张强度、证据边界、负结果和引用，不补新的局限或竞争解释。只给修改稿。
+……
+```
+
 ```text
 审阅这段基金申请的论证，检查问题、目标、方法与前期基础的关系。不要补写数据和经历，缺少的依据列在正文之外。
 ```
@@ -85,7 +105,7 @@ git clone https://github.com/Hyacehila/humanizer-zh-next <SKILLS_DIR>/humanizer-
 | --- | --- |
 | [SKILL.md](SKILL.md) | 公共约束、35 类通用模式、中文表达、体裁矩阵、作者声音、文件保护、流程与完整示例 |
 | [commercial-editing.md](references/commercial-editing.md) | 商务与营销文案的分维度审阅 |
-| [academic-writing.md](references/academic-writing.md) | 数字引用、学术语体、证据与审稿回复 |
+| [academic-writing.md](references/academic-writing.md) | 数字引用、学术语体、防御性表达、必要限定、证据与审稿回复 |
 | [grant-proposals.md](references/grant-proposals.md) | 研究计划、基金模板和目标与可行性 |
 
 商务文案的分维度审阅独立保存；学术与基金分支分别处理研究结果和拟开展工作。基金材料涉及既有研究结果时，可同时读取学术分支。
@@ -111,10 +131,18 @@ git clone https://github.com/Hyacehila/humanizer-zh-next <SKILLS_DIR>/humanizer-
 - [hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop)：保留适合中文的编辑思路，采用提交未变。
 - [AIScientists-Dev/academic-humanizer](https://github.com/AIScientists-Dev/academic-humanizer)：承接 1.3.0 的 0.3.3 学术基线，采用提交未变。
 
-本次新增两项来源：
+2.0.0 新增的两项来源继续保留：
 
 - [jiji262/humanizer-chinese](https://github.com/jiji262/humanizer-chinese)：选择性引用中文句式、弱动词、无主句、语域和防假口语，全部融入主文件，不创建独立 reference。
 - [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills)：选择性适配 copy-editing 的分维度审阅。
+
+2.1.0 新增参考 [deathcats4/scientific-manuscript-editor](https://github.com/deathcats4/scientific-manuscript-editor)，主要吸收以下内容：
+
+- [科学主张与必要限定](https://github.com/deathcats4/scientific-manuscript-editor/blob/9371352cf7153076065421e8686bf1139f61ddc6/references/scientific-integrity.md)：让主张直接表达边界，减少叠加限定与对未提出主张的防御。
+- [学术自然度](https://github.com/deathcats4/scientific-manuscript-editor/blob/9371352cf7153076065421e8686bf1139f61ddc6/references/academic-naturalness.md)与[学术表达保护](https://github.com/deathcats4/scientific-manuscript-editor/blob/9371352cf7153076065421e8686bf1139f61ddc6/references/academic-protection.md)：按实际作用识别重复，删除或合并后保留论证和引用关系。
+- [全文一致性](https://github.com/deathcats4/scientific-manuscript-editor/blob/9371352cf7153076065421e8686bf1139f61ddc6/references/continuity-and-consistency.md)与[讨论组织](https://github.com/deathcats4/scientific-manuscript-editor/blob/9371352cf7153076065421e8686bf1139f61ddc6/references/discussion.md)：按章节功能保留限定，综合已有判断时避免重复整套辩护。
+
+这些方法已按本项目的中文编辑范围改写；未引入该项目的完整论文起草、作者访谈、跨会话状态文件或多阶段交接流程。采用版本、许可与具体取舍见 [上游整合记录](docs/upstream-sources.md) 和 [第三方声明](THIRD_PARTY_NOTICES.md)。
 
 没有把这些项目的规则全部叠加：模型指纹、检测准确率、统一禁词、固定句式配额、无依据的数字和承诺不纳入本项目。已审阅但没有新增价值的候选保留在整合记录中，便于之后复查。
 
@@ -137,6 +165,7 @@ python scripts/check_structure.py original.md edited.md
 
 ## 版本历史
 
+- **2.1.0（2026-10-15）**：重点优化学术表达中的防御性写作，主要适用于 GPT6 系列模型；补充主张内的边界表达、重复限定辨别、章节限定分布、删句后的论证核对与行为案例，新增 scientific-manuscript-editor 参考资料。
 - **2.0.0（2026-10-07）**：完整通用模式与中文表达集中在主文件，只保留商务营销、学术写作、基金提案三个 reference；以英文 3.1.0 和中文 2026-09-23 修订更新规则，新增中文适配与商务审阅两项来源；收紧事实、主张和文件保护，将来源记录移至 docs，增加可执行检查。
 - **1.3.0**：增加按需加载的中文学术写作 reference，覆盖论文、学位论文、审稿回复和中国基金申请；加入论断与证据、目标与可行性检查，保护数字、公式、结果和引用。
 - **1.2.0**：增加体裁决策矩阵和事实新增边界；个人叙事新增内容逐项提示核实，专业体裁禁止补写事实；新增第三方版权声明并修正完整目录安装方式。2.0.0 进一步取消普通个人叙事补写细节的例外。

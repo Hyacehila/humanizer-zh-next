@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "reviewed_on": "2026-10-03",
-  "project_version": "2.0.0",
+  "reviewed_on": "2026-10-15",
+  "project_version": "2.1.0",
   "local_base": "cf08ea33910a094f6738cec01ed9c6fc19acc2f9",
   "remote_base": "10795c2964cec5d1f4bc4c7830b51adaa5eca33c",
   "sources": [
@@ -97,6 +97,25 @@
       ],
       "contribution": "按清晰度、声音、读者利益、证据、具体性和行动条件分维度审阅",
       "not_adopted": "评分面板、固定七轮、强制增强情绪、无依据的数据量化、承诺和转化策略"
+    },
+    {
+      "repository": "deathcats4/scientific-manuscript-editor",
+      "commit": "9371352cf7153076065421e8686bf1139f61ddc6",
+      "version": "1.9.0 + 2026-10-08 main updates",
+      "reviewed_on": "2026-10-15",
+      "license": "MIT",
+      "source_paths": [
+        "references/scientific-integrity.md",
+        "references/academic-naturalness.md",
+        "references/academic-protection.md",
+        "references/continuity-and-consistency.md",
+        "references/discussion.md"
+      ],
+      "adapted_into": [
+        "references/academic-writing.md"
+      ],
+      "contribution": "主张内的边界表达、重复防御与必要限定的区分、章节限定分布、删句后的论证作用核对；中文示例重新编写",
+      "not_adopted": "完整论文起草、作者访谈、跨会话上下文文件、多阶段交接流程和独立审查体系；不把限定改为全文只说一次的硬规则"
     }
   ],
   "reviewed_candidates": [

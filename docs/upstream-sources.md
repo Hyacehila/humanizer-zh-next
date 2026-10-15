@@ -1,12 +1,14 @@
 # 上游整合记录
 
-维护记录，普通润色无需加载。上游审阅日期为 2026-10-03，结构修订日期为 2026-10-06；精确提交、采用路径和目标文件见 [upstreams.json](upstreams.json)，第三方版权见 [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md)。来源是规则和方法参考，不是需要在线调用的运行依赖。
+维护记录，普通润色无需加载。2.0.0 的上游审阅日期为 2026-10-03，结构修订日期为 2026-10-06；2.1.0 于 2026-10-15 审阅并新增防御性写作来源，既有来源的采用版本未调整。精确提交、采用路径和目标文件见 [upstreams.json](upstreams.json)，第三方版权见 [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md)。来源是规则和方法参考，不是需要在线调用的运行依赖。
 
-## 本次升级基线
+## 既有基线与 2.1.0 更新
 
 升级开发最初基于本地 1.2.0（`cf08ea33910a094f6738cec01ed9c6fc19acc2f9`），并吸收远端 1.3.0（`10795c2964cec5d1f4bc4c7830b51adaa5eca33c`）的中文学术模式。2.0.0 保留这一能力，拆出基金提案分支，并重构通用编辑契约。版本提交承接 1.3.0 的历史；`upstreams.json` 中的基线字段记录研究开发起点，不表示发布后的 HEAD。
 
 通用模式、中文句式、原项目的样本匹配方法、体裁判断和文件保护均集中在主 `SKILL.md`。35 类通用模式保留中文示例与适用边界；`references/` 只包含商务营销、学术写作和基金提案三个分支。来源记录移至 `docs/`，不作为第四个编辑分支。
+
+2.1.0 在现有学术分支中补充防御性表达的判断与改写，主要面向 GPT6 系列模型的学术润色与审阅场景。新增规则覆盖主张中的边界、重复限定、章节功能与删句后的论证核对；不扩展为完整论文生产流程。行为案例与验证范围见 [评测说明](../tests/README.md)。
 
 ## 已整合来源
 
@@ -18,6 +20,15 @@
 | [AIScientists-Dev/academic-humanizer](https://github.com/AIScientists-Dev/academic-humanizer/tree/94b88b23703bed7df507acae7d6d5876209a0cdf) | 0.3.3：学术声音、数字引用、论断与证据、提案可行性；当前提交未变 | 保留 1.3.0 中文适配；实质主张调整按用户范围进行；年度模板按任务核对 |
 | [jiji262/humanizer-chinese](https://github.com/jiji262/humanizer-chinese/tree/1d6c08e10fbfe0e1b36ac784834451c6aae0a92c) | 新来源：中文无主句、欧化句法、弱动词和防过度纠偏，直接融入主 SKILL.md | 不创建独立 reference；未采用模型指纹、检测准确率、词频配额和补造细节的示例 |
 | [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills/tree/26f7342b26670e5581b48cd64e9dba3eb8a0c3aa/skills/copy-editing) | 新来源：copy-editing 2.1.0 的分维度审阅、利益与证据检查 | 只处理已有商务文案；不自动补指标、担保、品牌故事和紧迫感 |
+| [deathcats4/scientific-manuscript-editor](https://github.com/deathcats4/scientific-manuscript-editor/tree/9371352cf7153076065421e8686bf1139f61ddc6) | 2.1.0 新来源：元数据版本 1.9.0，含 2026-10-08 主分支更新；学术自然度、必要限定、论证作用与章节一致性 | 只适配学术编辑所需规则；保留负结果、真实审稿回应和独立阅读单元的限定，不引入论文起草、访谈、跨会话文件或多阶段交接 |
+
+### 防御性写作的采纳取舍
+
+- `scientific-integrity.md`：把原稿已有的研究对象、范围和确定程度写进主张；不自动添加对假想更强主张的辩护，也不凭未核实的证据削弱作者结论。
+- `academic-naturalness.md` 与 `academic-protection.md`：依据句子的实际作用识别重复；删除或合并后保留必要的推理、边界、引用和指代关系。
+- `continuity-and-consistency.md` 与 `discussion.md`：不同章节按自身功能保留限定；综合已建立的判断时，不重复展开整套证据辩护。
+- 普通润色仍保持科学主张；实质校准按本项目原有任务范围执行。没有照搬上游的完整科学决策和协作流程。
+- 中文教学示例与新增行为案例均为本项目编写的合成材料，不复用上游示例中的数据或研究事实。
 
 ## 已审阅但未整合
 
