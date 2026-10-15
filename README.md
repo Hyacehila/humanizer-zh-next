@@ -4,7 +4,7 @@
 
 当前版本为 **2.1.0**，版本日期为 **2026-10-15**。本次重点优化学术表达中的防御性写作：减少重复免责声明、过度限定和针对假想批评的自我辩护，保留必要的科学边界、负结果与作者判断。
 
-这是一份由 Agent 读取执行的编辑技能，无独立模型或在线运行服务。辅助检查脚本使用 Python 3.10+ 标准库；普通文本编辑不依赖 Python。它不判断作者身份，也不承诺通过检测器或移除水印。
+这是一份由 Agent 读取执行的编辑技能，无独立模型或在线运行服务。辅助检查脚本使用 Python 3.10+ 标准库；普通文本编辑不依赖 Python。
 
 ## 2.1.0 更新重点：防御性写作
 
@@ -42,9 +42,7 @@ npx skills add https://github.com/Hyacehila/humanizer-zh-next
 git clone https://github.com/Hyacehila/humanizer-zh-next <SKILLS_DIR>/humanizer-zh-next
 ```
 
-安装时保留主文件、完整的三个 `references/`、`LICENSE` 和 `THIRD_PARTY_NOTICES.md`；只复制主文件会丢失体裁分支。`docs/` 保存来源记录，`scripts/` 和 `tests/` 提供验证材料，不是普通编辑运行的必需依赖。维护者应保留完整目录。
-
-本次升级没有自动修改其他已安装副本。技能目录的名称应为 `humanizer-zh-next`，与元数据 `name` 一致；源码仓库可以使用其他本地目录名。
+安装时保留主文件、完整的三个 `references/`、`LICENSE` 和 `THIRD_PARTY_NOTICES.md`；只复制主文件会丢失体裁分支。`docs/` 保存来源记录，`scripts/` 和 `tests/` 提供验证材料用于维护本身。
 
 ## 使用
 
